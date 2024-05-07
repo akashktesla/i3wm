@@ -186,15 +186,15 @@ bindsym $mod+a exec --no-startup-id /home/akash/.config/i3/vim_mode.sh
 
 bindsym $mod+shift+s exec "coreshot"
 
-exec_always --no-startup-id $home/.config/polybar/launch.sh
+exec_always --no-startup-id /home/akash/.config/polybar/launch.sh
 
-# gaps inner 5
+# gaps inner 1
 
 # define keybinding
-bindsym $mod+b exec --no-startup-id ~/.config/i3/toggle_polybar.sh
+bindsym $mod+b exec --no-startup-id /home/akash/.config/i3/toggle_polybar.sh
 
 #wallpaper
-exec_always feh --bg-fill /home/akash/pictures/owl_wallpaper.png
+exec_always feh --bg-fill /home/akash/Pictures/owl_wallpaper.png
 
 # exec_always kc
 for_window [class="^.*"] border pixel 0
