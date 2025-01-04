@@ -4,6 +4,11 @@ font pango:monospace 8
 exec --no-startup-id dex --autostart --environment i3
 exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 exec --no-startup-id nm-applet
+#notifier startup
+exec --no-startup-id dunst &
+
+#battery check notifier
+exec --no-startup-id watch -n 300 ~/.config/i3/battery_check.sh
 
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
@@ -21,7 +26,10 @@ bindsym $mod+Return exec alacritty
 # kill focused window
 bindsym $mod+q kill
 
-bindsym $mod+d exec --no-startup-id rofi -show run 
+bindsym $mod+d exec --no-startup-id rofi -show drun 
+
+#sleep
+bindsym $mod+i exec systemctl suspend
 
 # change focus
 bindsym $mod+h focus left
@@ -162,8 +170,8 @@ bindsym $mod+r mode "resize"
 mode "control"{
         #commands
         #volume
-        bindsym k exec wpctl set-volume @DEFAULT_SINK@ 0.05+
-        bindsym j exec wpctl set-volume @DEFAULT_SINK@ 0.05-
+        bindsym k exec wpctl set-volume @DEFAULT_SINK@ 0.01+
+        bindsym j exec wpctl set-volume @DEFAULT_SINK@ 0.01-
 
         bindsym l exec brightnessctl set 1%+ -n 
         bindsym h exec brightnessctl set 1%- -n 
@@ -175,6 +183,30 @@ mode "control"{
         bindsym $mod+r mode "resize"
 }
 bindsym $mod+c mode "control"
+
+mode "mouse"{
+        #mouse movements vim bindings 
+        bindsym k exec xdotool mousemove_relative -- 0 -25
+        bindsym j exec xdotool mousemove_relative -- 0 25
+        bindsym l exec xdotool mousemove_relative -- 25 0
+        bindsym h exec xdotool mousemove_relative -- -25 0
+
+        bindsym a exec xdotool click 1 
+        bindsym s exec xdotool click 3
+        bindsym f exec xdotool click 5
+        bindsym d exec xdotool click 4
+
+        
+        #return to normal
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+        bindsym $mod+c mode "control"
+        bindsym $mod+r mode "resize"
+        bindsym $mod+m mode "default"
+}
+bindsym $mod+m mode "mouse"
+
+
 
 
 mode "alt"{
@@ -193,8 +225,11 @@ exec_always --no-startup-id /home/akash/.config/polybar/launch.sh
 # define keybinding
 bindsym $mod+b exec --no-startup-id /home/akash/.config/i3/toggle_polybar.sh
 
+#lock
+bindsym $mod+x exec "i3lock-fancy"
+
 #wallpaper
-exec_always feh --bg-fill /home/akash/Pictures/owl_wallpaper.png
+exec_always feh --bg-fill /home/akash/Pictures/owl-wallpaper.png
 
 # exec_always kc
 for_window [class="^.*"] border pixel 0
@@ -206,3 +241,4 @@ client.focused_inactive #000000 #000000 #888888 #ff6666
 #multi monitor setup
 exec xrandr --output hdmi-1 --primary
 exec xrandr --output edp-1 --right-of hdmi-1
+
