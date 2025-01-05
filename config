@@ -140,7 +140,7 @@ bindsym $mod+Shift+r restart
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
 
 # resize window (you can also use the mouse for that)
-mode "resize" {
+mode "Resize" {
         # These bindings trigger as soon as you enter the resize mode
 
         # Pressing left will shrink the window’s width.
@@ -162,12 +162,12 @@ mode "resize" {
         bindsym Return mode "default"
         bindsym Escape mode "default"
         bindsym $mod+r mode "default"
-        bindsym $mod+c mode "control"
+        bindsym $mod+c mode "Control"
 }
 
-bindsym $mod+r mode "resize"
+bindsym $mod+r mode "Resize"
 
-mode "control"{
+mode "Control"{
         #commands
         #volume
         bindsym k exec wpctl set-volume @DEFAULT_SINK@ 0.01+
@@ -180,11 +180,11 @@ mode "control"{
         bindsym Return mode "default"
         bindsym Escape mode "default"
         bindsym $mod+c mode "default"
-        bindsym $mod+r mode "resize"
+        bindsym $mod+r mode "Resize"
 }
-bindsym $mod+c mode "control"
+bindsym $mod+c mode "Control";exec notify-send "Switched to Control Mode"
 
-mode "mouse"{
+mode "Mouse"{
         #mouse movements vim bindings 
         bindsym k exec xdotool mousemove_relative -- 0 -25
         bindsym j exec xdotool mousemove_relative -- 0 25
@@ -195,25 +195,22 @@ mode "mouse"{
         bindsym s exec xdotool click 3
         bindsym f exec xdotool click 5
         bindsym d exec xdotool click 4
-
         
         #return to normal
         bindsym Return mode "default"
         bindsym Escape mode "default"
-        bindsym $mod+c mode "control"
-        bindsym $mod+r mode "resize"
+        bindsym $mod+c mode "Control"
+        bindsym $mod+r mode "Resize"
         bindsym $mod+m mode "default"
+        bindsym $mod+o mode "power"
 }
-bindsym $mod+m mode "mouse"
+bindsym $mod+m mode "Mouse"; exec notify-send "Switched to Mouse Mode"
 
-
-
-
-mode "alt"{
+mode "Alt"{
         bindsym Escape exec --no-startup-id /home/akash/.config/i3/vim_mode_exit.sh
 }
 
-bindsym $mod+a exec --no-startup-id /home/akash/.config/i3/vim_mode.sh
+bindsym $mod+a exec --no-startup-id /home/akash/.config/i3/vim_mode.sh;exec notify-send "Switched to Alt Mode"
 
 
 bindsym $mod+shift+s exec "coreshot"

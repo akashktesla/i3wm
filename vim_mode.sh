@@ -6,4 +6,4 @@ xmodmap -e "keycode 46 = Right"
 xmodmap -e "keycode 40 = Delete"
 xmodmap -e "keycode 56 = BackSpace"
 
-i3-msg mode alt
+i3-msg mode Alt
