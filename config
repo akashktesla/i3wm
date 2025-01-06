@@ -6,7 +6,8 @@ exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 exec --no-startup-id nm-applet
 #notifier startup
 exec --no-startup-id dunst &
-
+#picom
+exec --no-startup-id picom --experimental-backends
 #battery check notifier
 exec --no-startup-id watch -n 300 ~/.config/i3/battery_check.sh
 
@@ -217,7 +218,8 @@ bindsym $mod+shift+s exec "coreshot"
 
 exec_always --no-startup-id /home/akash/.config/polybar/launch.sh
 
-# gaps inner 1
+gaps inner 2
+gaps outer 2
 
 # define keybinding
 bindsym $mod+b exec --no-startup-id /home/akash/.config/i3/toggle_polybar.sh
@@ -238,4 +240,12 @@ client.focused_inactive #000000 #000000 #888888 #ff6666
 #multi monitor setup
 exec xrandr --output hdmi-1 --primary
 exec xrandr --output edp-1 --right-of hdmi-1
+
+#floating terminal
+#
+bindsym $mod+Shift+Return exec --no-startup-id alacritty --class "floating_terminal" -o window.opacity=0.9
+for_window [class="floating_terminal"] floating enable, resize set 800 400, move position center
+
+#
+
 
